@@ -1,1 +1,16 @@
+.width80 {
+  width: 80%;
+}
 
+.repo-grid {
+  margin: 0 auto;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.repo-grid > article {
+  width: 100%;
+  margin-bottom: 20px;
+}
