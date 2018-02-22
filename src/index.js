@@ -4,7 +4,9 @@ import { ApolloProvider } from "react-apollo";
 import { ApolloClient } from "apollo-client";
 import { HttpLink, InMemoryCache } from "apollo-boost";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
+import Header from "./components/Header/Header";
+import Search from "./pages/Search/Search";
 import token from "./token";
 import registerServiceWorker from "./registerServiceWorker";
 import "./index.css";
@@ -26,9 +28,17 @@ const client = new ApolloClient({
 
 const App = () => (
   <ApolloProvider client={client}>
-    <Router>
-      <Route exact path="/" component={Home} />
-    </Router>
+    <div>
+      <Router>
+        <div>
+          <Header />
+          <div className="uk-card uk-card-default uk-padding-small">
+            <Route exact path="/" component={Home} />
+            <Route path="/search" component={Search} />
+          </div>
+        </div>
+      </Router>
+    </div>
   </ApolloProvider>
 );
 

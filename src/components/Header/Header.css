@@ -8,3 +8,13 @@
   color: #fff;
   font-weight: 700;
 }
+
+.header > a,
+.header > a:link,
+.header > a:visited,
+.header > a:hover,
+.header > a:active,
+.header > a:focus {
+  text-decoration: none;
+  color: #fff;
+}

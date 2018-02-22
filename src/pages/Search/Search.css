@@ -1,0 +1,9 @@
+.repo-grid-search {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.repo-grid-search > article {
+  width: 100%;
+  margin-bottom: 20px;
+}
