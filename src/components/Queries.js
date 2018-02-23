@@ -35,12 +35,13 @@ export const search = gql`
     $before: String
     $first: Int
     $last: Int
+    $type: SearchType!
   ) {
     search(
       query: $query
       after: $after
       before: $before
-      type: REPOSITORY
+      type: $type
       first: $first
       last: $last
     ) {

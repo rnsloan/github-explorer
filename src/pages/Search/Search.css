@@ -1,3 +1,37 @@
+.search-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 20px;
+  grid-template-areas:
+    "main"
+    "column";
+}
+
+@media screen and (min-width: 768px) {
+  .search-grid {
+    grid-template-columns: 25% 1fr;
+    grid-template-areas: "column main";
+  }
+}
+
+.search-grid-column {
+  grid-area: column;
+}
+.search-grid-main {
+  grid-area: main;
+}
+
+.search-types {
+  border: 1px solid gray;
+  padding: 10px;
+}
+
+.search-types a {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .repo-grid-search {
   display: flex;
   flex-wrap: wrap;

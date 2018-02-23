@@ -3,10 +3,11 @@ import ReactDOM from "react-dom";
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient } from "apollo-client";
 import { HttpLink, InMemoryCache } from "apollo-boost";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Header from "./components/Header/Header";
 import Search from "./pages/Search/Search";
+import Repo from "./pages/Repo/Repo";
 import token from "./token";
 import registerServiceWorker from "./registerServiceWorker";
 import "./index.css";
@@ -33,8 +34,11 @@ const App = () => (
         <div>
           <Header />
           <div className="uk-card uk-card-default uk-padding-small">
-            <Route exact path="/" component={Home} />
-            <Route path="/search" component={Search} />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/search" component={Search} />
+              <Route component={Repo} />
+            </Switch>
           </div>
         </div>
       </Router>

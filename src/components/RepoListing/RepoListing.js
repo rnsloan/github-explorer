@@ -1,6 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./RepoListing.css";
 import star from "./star.svg";
+
+const RepositoryTopics = ({ data }) => {
+  return (
+    <ul className="uk-subnav uk-subnav-pill">
+      {data.map(repositoryTopic => {
+        return (
+          <li key={repositoryTopic.node.topic.name}>
+            <a href={repositoryTopic.node.url}>
+              {repositoryTopic.node.topic.name}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
 
 const Repo = ({ data }) => {
   return (
@@ -16,7 +33,7 @@ const Repo = ({ data }) => {
         </div>
         <div className="uk-width-expand">
           <h4>
-            <a href="#">{data.nameWithOwner}</a>&nbsp;
+            <Link to={`/${data.nameWithOwner}`}>{data.nameWithOwner}</Link>&nbsp;
             <span
               title="stars in the last week"
               aria-label="stars in the last week"
@@ -35,6 +52,15 @@ const Repo = ({ data }) => {
           })()}
         />
       </div>
+      {data.repositoryTopics &&
+        data.repositoryTopics.edges && (
+          <RepositoryTopics data={data.repositoryTopics.edges} />
+        )}
+      {data.licenseInfo && (
+        <p>
+          <small>{data.licenseInfo.name}</small>
+        </p>
+      )}
     </article>
   );
 };
