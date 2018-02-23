@@ -1,4 +1,6 @@
 import React from "react";
+import "./Repo.css";
+import star from "./star.svg";
 
 const Repo = ({ data }) => {
   return (
@@ -18,8 +20,9 @@ const Repo = ({ data }) => {
             <span
               title="stars in the last week"
               aria-label="stars in the last week"
-              className="uk-badge"
+              className="uk-badge badge"
             >
+              <img src={star} alt="" className="star" />
               {data.stargazers.totalCount}
             </span>
           </h4>

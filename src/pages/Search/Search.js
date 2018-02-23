@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { Query } from "react-apollo";
 import Spinner from "../../components/Spinner";
-import Repo from "../../components/Repo";
+import Repo from "../../components/Repo/Repo";
 import { search as searchQuery } from "../../components/Queries";
 import "./Search.css";
 

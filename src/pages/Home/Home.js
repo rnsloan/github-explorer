@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { Query } from "react-apollo";
 import Spinner from "../../components/Spinner";
-import Repo from "../../components/Repo";
+import Repo from "../../components/Repo/Repo";
 import { home as homeQuery } from "../../components/Queries";
 import "./Home.css";
 
