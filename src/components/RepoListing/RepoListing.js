@@ -1,5 +1,5 @@
 import React from "react";
-import "./Repo.css";
+import "./RepoListing.css";
 import star from "./star.svg";
 
 const Repo = ({ data }) => {

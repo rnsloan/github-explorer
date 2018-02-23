@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { Query } from "react-apollo";
 import Spinner from "../../components/Spinner";
-import Repo from "../../components/Repo/Repo";
+import RepoListing from "../../components/RepoListing/RepoListing";
 import { home as homeQuery } from "../../components/Queries";
 import "./Home.css";
 
@@ -56,7 +56,10 @@ class Home extends Component {
                 <div className="repo-grid">
                   {data.search.edges.map(data => {
                     return (
-                      <Repo key={data.node.nameWithOwner} data={data.node} />
+                      <RepoListing
+                        key={data.node.nameWithOwner}
+                        data={data.node}
+                      />
                     );
                   })}
                 </div>

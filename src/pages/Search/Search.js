@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { Query } from "react-apollo";
 import Spinner from "../../components/Spinner";
-import Repo from "../../components/Repo/Repo";
+import RepoListing from "../../components/RepoListing/RepoListing";
 import { search as searchQuery } from "../../components/Queries";
 import "./Search.css";
 
@@ -41,7 +41,10 @@ const Search = props => {
               <div className="repo-grid-search">
                 {data.search.edges.map(data => {
                   return (
-                    <Repo key={data.node.nameWithOwner} data={data.node} />
+                    <RepoListing
+                      key={data.node.nameWithOwner}
+                      data={data.node}
+                    />
                   );
                 })}
                 <div className="pagination">
