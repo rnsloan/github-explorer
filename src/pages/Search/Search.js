@@ -44,40 +44,49 @@ const Search = props => {
                     <Repo key={data.node.nameWithOwner} data={data.node} />
                   );
                 })}
-                <button
-                  disabled={!data.search.pageInfo.hasPreviousPage}
-                  onClick={() => {
-                    fetchMore({
-                      variables: {
-                        before: data.search.pageInfo.startCursor,
-                        after: "",
-                        last: resultLength,
-                        first: null
-                      },
-                      updateQuery: updateQuery
-                    });
-                  }}
-                >
-                  Previous
-                </button>
-                <button
-                  disabled={!data.search.pageInfo.hasNextPage}
-                  onClick={() => {
-                    fetchMore({
-                      variables: {
-                        after: data.search.pageInfo.endCursor,
-                        before: "",
-                        last: null,
-                        first: resultLength
-                      },
-                      updateQuery: updateQuery
-                    });
-                  }}
-                >
-                  Next
-                </button>
+                <div className="pagination">
+                  <button
+                    className="uk-button uk-button-default"
+                    disabled={!data.search.pageInfo.hasPreviousPage}
+                    onClick={() => {
+                      fetchMore({
+                        variables: {
+                          before: data.search.pageInfo.startCursor,
+                          after: "",
+                          last: resultLength,
+                          first: null
+                        },
+                        updateQuery
+                      });
+                    }}
+                  >
+                    Previous
+                  </button>
+
+                  <button
+                    className="uk-button uk-button-default"
+                    disabled={!data.search.pageInfo.hasNextPage}
+                    onClick={() => {
+                      fetchMore({
+                        variables: {
+                          after: data.search.pageInfo.endCursor,
+                          before: "",
+                          last: null,
+                          first: resultLength
+                        },
+                        updateQuery
+                      });
+                    }}
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
             );
+          }
+
+          if (data && data.search && !data.search.edges.length && !loading) {
+            html = <p className="uk-h3 uk-text-center">No results</p>;
           }
 
           return <div>{html}</div>;
