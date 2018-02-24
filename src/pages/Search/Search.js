@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter, Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import numeral from "numeral";
 import { Query } from "react-apollo";
 import Spinner from "../../components/Spinner";
@@ -60,6 +61,9 @@ const Search = props => {
         if (data && !loading) {
           html = (
             <div className="Search-grid">
+              <Helmet>
+                <title>GitHub Explorer - Search: {query}</title>
+              </Helmet>
               <aside className="Search-grid-column">
                 <div className="Search-types">
                   <ul className="uk-list uk-list-divider uk-margin-remove">
@@ -156,7 +160,13 @@ const Search = props => {
         }
 
         if (data && data.search && !data.search.edges.length && !loading) {
-          html = <p className="uk-h3 uk-text-center">No results</p>;
+          html = (
+            <p className="uk-h3 uk-text-center">
+              <Helmet>
+                <title>GitHub Explorer - Search: {query}</title>
+              </Helmet>No results
+            </p>
+          );
         }
 
         return html;

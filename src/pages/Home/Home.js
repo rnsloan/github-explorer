@@ -57,11 +57,11 @@ class Home extends Component {
                 <div className="Home-repo-grid">
                   {data.search.edges.map(data => {
                     return (
-                      <div className="Home-RepoListing-wrapper">
-                        <RepoListing
-                          key={data.node.nameWithOwner}
-                          data={data.node}
-                        />
+                      <div
+                        key={data.node.nameWithOwner}
+                        className="Home-RepoListing-wrapper"
+                      >
+                        <RepoListing data={data.node} />
                       </div>
                     );
                   })}
