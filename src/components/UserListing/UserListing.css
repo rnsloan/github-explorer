@@ -1,0 +1,10 @@
+.location,
+.email {
+  width: 15px;
+  height: auto;
+  margin-right: 5px;
+}
+
+.email {
+  margin-left: 20px;
+}

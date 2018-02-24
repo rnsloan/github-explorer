@@ -1,25 +1,54 @@
 import React from "react";
 import { withRouter, Link } from "react-router-dom";
+import numeral from "numeral";
 import { Query } from "react-apollo";
 import Spinner from "../../components/Spinner";
 import RepoListing from "../../components/RepoListing/RepoListing";
+import UserListing from "../../components/UserListing/UserListing";
+import IssueListing from "../../components/IssueListing/IssueListing";
 import { search as searchQuery } from "../../components/Queries";
 import "./Search.css";
 
+const formatNumber = number => {
+  const int = parseInt(number, 10);
+  if (int > 999) {
+    return numeral(int).format("0.0a");
+  }
+  return int;
+};
+
 const Search = props => {
   const params = new URLSearchParams(props.location.search);
-  const query = params.get("query");
-  const type = params.get("type").toUpperCase() || "REPOSITORY";
+  let query = params.get("query");
+  let apiQuery = query;
+  let headingText = "Repositories";
+  let type = params.get("type");
+  switch (type) {
+    case "issue":
+      apiQuery = `${query} is:issue`;
+      headingText = "Issues";
+      type = "ISSUE";
+      break;
+    case "user":
+      apiQuery = `${query} type:user`;
+      headingText = "Users";
+      type = "USER";
+      break;
+    default:
+      type = "REPOSITORY";
+  }
   const resultLength = 10;
   const updateQuery = (previousResult, { fetchMoreResult }) => {
     const newEdges = fetchMoreResult.search.edges;
     return newEdges.length ? fetchMoreResult : previousResult;
   };
+
   return (
     <Query
       query={searchQuery}
-      variables={{ query, first: resultLength, type }}
+      variables={{ query: apiQuery, first: resultLength, type }}
       notifyOnNetworkStatusChange={true}
+      fetchPolicy="network-only"
     >
       {({ loading, error, data, fetchMore }) => {
         let html = (
@@ -35,10 +64,10 @@ const Search = props => {
                 <div className="search-types">
                   <ul className="uk-list uk-list-divider uk-margin-remove">
                     <li className="uk-active">
-                      <Link to={`search?query=${query}&type=repository`}>
+                      <Link to={`search?query=${query}`}>
                         <span>Repositories </span>
                         <span className="uk-badge">
-                          {data.search.repositoryCount}
+                          {formatNumber(data.search.repositoryCount)}
                         </span>
                       </Link>
                     </li>
@@ -46,7 +75,7 @@ const Search = props => {
                       <Link to={`search?query=${query}&type=issue`}>
                         <span>Issues</span>
                         <span className="uk-badge">
-                          {data.search.issueCount}
+                          {formatNumber(data.search.issueCount)}
                         </span>
                       </Link>
                     </li>
@@ -54,7 +83,7 @@ const Search = props => {
                       <Link to={`search?query=${query}&type=user`}>
                         <span>Users</span>
                         <span className="uk-badge">
-                          {data.search.userCount}
+                          {formatNumber(data.search.userCount)}
                         </span>
                       </Link>
                     </li>
@@ -64,10 +93,18 @@ const Search = props => {
               <main className="search-grid-main">
                 <h1 className="uk-h3 uk-heading-divider">
                   {new Intl.NumberFormat().format(data.search.repositoryCount)}{" "}
-                  Repository results
+                  {headingText}
                 </h1>
                 <div className="repo-grid-search">
-                  {data.search.edges.map(data => {
+                  {data.search.edges.map((data, idx) => {
+                    if (type === "USER") {
+                      return (
+                        <UserListing key={data.node.login} data={data.node} />
+                      );
+                    }
+                    if (type === "ISSUE") {
+                      return <IssueListing key={idx} data={data.node} />;
+                    }
                     return (
                       <RepoListing
                         key={data.node.nameWithOwner}
@@ -83,7 +120,7 @@ const Search = props => {
                         fetchMore({
                           variables: {
                             before: data.search.pageInfo.startCursor,
-                            after: "",
+                            after: null,
                             last: resultLength,
                             first: null
                           },
@@ -101,7 +138,7 @@ const Search = props => {
                         fetchMore({
                           variables: {
                             after: data.search.pageInfo.endCursor,
-                            before: "",
+                            before: null,
                             last: null,
                             first: resultLength
                           },

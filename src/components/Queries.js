@@ -56,9 +56,39 @@ export const search = gql`
       }
       edges {
         node {
+          ...IssueSearch
           ...RepoSearch
+          ...UserSearch
         }
       }
+    }
+  }
+
+  fragment UserSearch on User {
+    login
+    name
+    avatarUrl
+    url
+    bioHTML
+    location
+    email
+  }
+
+  fragment IssueSearch on Issue {
+    title
+    bodyHTML
+    number
+    createdAt
+    url
+    author {
+      login
+    }
+    repository {
+      nameWithOwner
+      url
+    }
+    comments(first: 1) {
+      totalCount
     }
   }
 

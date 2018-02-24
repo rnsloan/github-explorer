@@ -40,6 +40,7 @@ class Home extends Component {
               type="search"
               placeholder="Search GitHub"
               onChange={this.handleChange}
+              autoFocus
             />
           </form>
         </div>
