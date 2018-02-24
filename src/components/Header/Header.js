@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => (
-  <div className="header">
+  <div className="Header">
     <Link to="/">GitHub Explorer</Link>
   </div>
 );

@@ -1,8 +1,8 @@
-.width80 {
+.Home-width80 {
   width: 80%;
 }
 
-.repo-grid {
+.Home-repo-grid {
   margin: 0 auto;
   width: 80%;
   display: flex;
@@ -10,7 +10,7 @@
   justify-content: space-around;
 }
 
-.repo-grid > article {
+.Home-RepoListing-wrapper {
   width: 100%;
   margin-bottom: 20px;
 }

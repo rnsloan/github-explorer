@@ -2,7 +2,7 @@ import React from "react";
 import "./IssueListing.css";
 import { DateTime } from "luxon";
 
-const Issue = ({ data }) => {
+const IssueListing = ({ data }) => {
   const date = DateTime.fromISO(data.createdAt).toFormat("DD");
   return (
     <article className="uk-card uk-card-small uk-card-body uk-card-default">
@@ -21,7 +21,7 @@ const Issue = ({ data }) => {
           })()}
         />
       </div>
-      <footer className="footer">
+      <footer className="IssueListing-footer">
         <div>
           <a href={data.repository.url}>{data.repository.nameWithOwner}</a>
         </div>
@@ -36,4 +36,4 @@ const Issue = ({ data }) => {
   );
 };
 
-export default Issue;
+export default IssueListing;

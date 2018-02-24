@@ -19,7 +19,7 @@ const RepositoryTopics = ({ data }) => {
   );
 };
 
-const Repo = ({ data }) => {
+const RepoListing = ({ data }) => {
   return (
     <article className="uk-card uk-card-small uk-card-body uk-card-default">
       <header className="uk-grid uk-grid-small uk-flex-middle">
@@ -37,9 +37,9 @@ const Repo = ({ data }) => {
             <span
               title="stars in the last week"
               aria-label="stars in the last week"
-              className="uk-badge badge"
+              className="uk-badge RepoListing-badge"
             >
-              <img src={star} alt="" className="star" />
+              <img src={star} alt="" className="RepoListing-star" />
               {data.stargazers.totalCount}
             </span>
           </h4>
@@ -65,4 +65,4 @@ const Repo = ({ data }) => {
   );
 };
 
-export default Repo;
+export default RepoListing;

@@ -59,9 +59,9 @@ const Search = props => {
 
         if (data && !loading) {
           html = (
-            <div className="search-grid">
-              <aside className="search-grid-column">
-                <div className="search-types">
+            <div className="Search-grid">
+              <aside className="Search-grid-column">
+                <div className="Search-types">
                   <ul className="uk-list uk-list-divider uk-margin-remove">
                     <li className="uk-active">
                       <Link to={`search?query=${query}`}>
@@ -90,12 +90,12 @@ const Search = props => {
                   </ul>
                 </div>
               </aside>
-              <main className="search-grid-main">
+              <main className="Search-grid-main">
                 <h1 className="uk-h3 uk-heading-divider">
                   {new Intl.NumberFormat().format(data.search.repositoryCount)}{" "}
                   {headingText}
                 </h1>
-                <div className="repo-grid-search">
+                <div className="Search-grid-items">
                   {data.search.edges.map((data, idx) => {
                     if (type === "USER") {
                       return (
@@ -112,7 +112,7 @@ const Search = props => {
                       />
                     );
                   })}
-                  <div className="pagination">
+                  <div className="Search-pagination">
                     <button
                       className="uk-button uk-button-default"
                       disabled={!data.search.pageInfo.hasPreviousPage}

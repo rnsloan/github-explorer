@@ -1,10 +1,10 @@
-.location,
-.email {
+.UserListing-location,
+.UserListing-email {
   width: 15px;
   height: auto;
   margin-right: 5px;
 }
 
-.email {
+.UserListing-email {
   margin-left: 20px;
 }

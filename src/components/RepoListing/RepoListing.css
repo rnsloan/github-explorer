@@ -1,9 +1,9 @@
-.star {
+.RepoListing-star {
   width: 15px;
   height: auto;
   margin-right: 5px;
 }
 
-.badge {
+.RepoListing-badge {
   padding: 8px !important;
 }

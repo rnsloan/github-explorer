@@ -3,7 +3,7 @@ import location from "./location.svg";
 import email from "./email.svg";
 import "./UserListing.css";
 
-const User = ({ data }) => {
+const UserListing = ({ data }) => {
   return (
     <article className="uk-card uk-card-small uk-card-body uk-card-default">
       <header className="uk-grid uk-grid-small uk-flex-middle">
@@ -34,13 +34,13 @@ const User = ({ data }) => {
         <p>
           {data.location && (
             <span>
-              <img src={location} alt="" className="location" />
+              <img src={location} alt="" className="UserListing-location" />
               <small>{data.location}</small>
             </span>
           )}
           {data.email && (
             <span>
-              <img src={email} alt="" className="email" />
+              <img src={email} alt="" className="UserListing-email" />
               <small>{data.email}</small>
             </span>
           )}
@@ -50,4 +50,4 @@ const User = ({ data }) => {
   );
 };
 
-export default User;
+export default UserListing;

@@ -32,7 +32,7 @@ class Home extends Component {
       <div>
         <div className="uk-text-center">
           <form
-            className="uk-search uk-search-default width80"
+            className="uk-search uk-search-default Home-width80"
             onSubmit={this.handleSubmit}
           >
             <input
@@ -54,13 +54,15 @@ class Home extends Component {
 
             if (data) {
               html = (
-                <div className="repo-grid">
+                <div className="Home-repo-grid">
                   {data.search.edges.map(data => {
                     return (
-                      <RepoListing
-                        key={data.node.nameWithOwner}
-                        data={data.node}
-                      />
+                      <div className="Home-RepoListing-wrapper">
+                        <RepoListing
+                          key={data.node.nameWithOwner}
+                          data={data.node}
+                        />
+                      </div>
                     );
                   })}
                 </div>

@@ -1,4 +1,4 @@
-.search-grid {
+.Search-grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-column-gap: 20px;
@@ -8,47 +8,47 @@
 }
 
 @media screen and (min-width: 768px) {
-  .search-grid {
+  .Search-grid {
     grid-template-columns: 25% 1fr;
     grid-template-areas: "column main";
   }
 }
 
-.search-grid-column {
+.Search-grid-column {
   grid-area: column;
 }
-.search-grid-main {
+.Search-grid-main {
   grid-area: main;
 }
 
-.search-types {
+.Search-types {
   border: 1px solid gray;
   padding: 10px;
 }
 
-.search-types a {
+.Search-types a {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.repo-grid-search {
+.Search-grid-items {
   display: flex;
   flex-wrap: wrap;
 }
 
-.repo-grid-search > article {
+.Search-grid-items > article {
   width: 100%;
   margin-bottom: 20px;
 }
 
-.pagination {
+.Search-pagination {
   display: flex;
   width: 100%;
   justify-content: center;
 }
 
-.pagination > button {
+.Search-pagination > button {
   margin: 10px;
   flex-basis: 150px;
 }

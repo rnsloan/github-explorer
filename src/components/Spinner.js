@@ -1,5 +1,7 @@
 import React from "react";
+
 // http://samherbert.net/svg-loaders/
+
 const Spinner = () => {
   return (
     <svg
