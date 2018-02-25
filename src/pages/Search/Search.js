@@ -7,7 +7,7 @@ import Spinner from "../../components/Spinner";
 import RepoListing from "../../components/RepoListing/RepoListing";
 import UserListing from "../../components/UserListing/UserListing";
 import IssueListing from "../../components/IssueListing/IssueListing";
-import { search as searchQuery } from "../../components/Queries";
+import { search as searchQuery } from "./Search.query";
 import "./Search.css";
 
 const formatNumber = number => {
