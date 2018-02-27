@@ -44,7 +44,9 @@ const App = () => (
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/search" component={Search} />
-              <Route component={Repo} />
+              <Route path="/:user/:repoName" component={Repo} />
+              <Route path="/:user" render={() => <div>User</div>} />
+              <Route render={() => <div>Page not found</div>} />
             </Switch>
           </div>
         </div>
