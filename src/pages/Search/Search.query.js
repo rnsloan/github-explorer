@@ -1,4 +1,5 @@
 import { gql } from "apollo-boost";
+import { repoFragment } from "../../shared/queries";
 
 export const search = gql`
   query search(
@@ -64,28 +65,5 @@ export const search = gql`
     }
   }
 
-  fragment RepoSearch on Repository {
-    nameWithOwner
-    shortDescriptionHTML
-    licenseInfo {
-      name
-    }
-    stargazers {
-      totalCount
-    }
-    owner {
-      avatarUrl
-      login
-    }
-    repositoryTopics(first: 5) {
-      edges {
-        node {
-          url
-          topic {
-            name
-          }
-        }
-      }
-    }
-  }
+  ${repoFragment}
 `;

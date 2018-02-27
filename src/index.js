@@ -9,6 +9,7 @@ import Home from "./pages/Home/Home";
 import Header from "./components/Header/Header";
 import Search from "./pages/Search/Search";
 import Repo from "./pages/Repo/Repo";
+import User from "./pages/User/User";
 import token from "./token";
 import introspectionQueryResultData from "./fragmentTypes.json";
 import registerServiceWorker from "./registerServiceWorker";
@@ -45,7 +46,7 @@ const App = () => (
               <Route exact path="/" component={Home} />
               <Route path="/search" component={Search} />
               <Route path="/:user/:repoName" component={Repo} />
-              <Route path="/:user" render={() => <div>User</div>} />
+              <Route path="/:user" component={User} />
               <Route render={() => <div>Page not found</div>} />
             </Switch>
           </div>
