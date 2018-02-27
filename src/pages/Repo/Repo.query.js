@@ -25,6 +25,7 @@ export const repo = gql`
           }
         }
         ... on Blob {
+          isBinary
           text
         }
       }

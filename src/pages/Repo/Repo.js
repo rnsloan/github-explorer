@@ -3,32 +3,88 @@ import { Query } from "react-apollo";
 import { withRouter, Link } from "react-router-dom";
 import { repo as repoQuery } from "./Repo.query";
 import Spinner from "../../components/Spinner";
+import "./Repo.css";
+
+const Blob = props => {
+  let output;
+  if (props.data.repository.object.isBinary) {
+    const url = `https://raw.githubusercontent.com${
+      props.location.pathname
+    }`.replace("blob/", "");
+    if (props.location.pathname.match(/\.(png|jpg|jpeg|gif|webp)$/)) {
+      output = <img src={url} alt="" />;
+    } else {
+      output = <a href={url}>{url}</a>;
+    }
+  } else {
+    output = <pre>{props.data.repository.object.text}</pre>;
+  }
+
+  return (
+    <div>
+      <h2 className="uk-h5">
+        <Link to={`/${props.user}/${props.repoName}`}>{props.repoName}</Link> /{" "}
+        {props.blobOrTreePath.replace(/\//g, " / ")}
+      </h2>
+      {output}
+    </div>
+  );
+};
+
+const Tree = props => {
+  const pathname = props.location.pathname;
+  return (
+    <ul className="Tree">
+      {props.data.repository.object.entries.map((obj, idx) => {
+        let url = `${pathname}/${obj.type}/${
+          props.data.repository.defaultBranchRef.name
+        }/${obj.name}`;
+
+        if (pathname.match(/tree|blob/)) {
+          console.log(url);
+          url = pathname.replace(/tree|blob/, obj.type);
+          url = `${url}/${obj.name}`;
+        }
+        return (
+          <li
+            className={url.match("tree") ? "Tree-tree" : "Tree-blob"}
+            key={idx}
+          >
+            <Link to={url}>{obj.name}</Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
 
 const Repo = props => {
-  //console.log(props);
   const path = props.location.pathname.replace(props.match.url, "");
   const user = props.match.params.user;
   const repoName = props.match.params.repoName;
-  let isRoot = false;
+
+  let gitRevExpression = "HEAD:";
+  let blobOrTreePath;
   try {
     const split = path.match("/(tree|blob)/([^/]*)/(.*)");
     const branchName = split[2];
-    const blobOrTreePath = split[3];
-    const isBlob = path.indexOf("/blob/") !== -1;
-  } catch (e) {
-    isRoot = true;
-  }
-  // queries: root, tree, blob
+    blobOrTreePath = split[3];
+    gitRevExpression = `${branchName}:${blobOrTreePath}`;
+  } catch (e) {}
 
   return (
     <div>
       <h1 className="uk-h3">
-        <Link to={user}>{user}</Link> /{" "}
-        <Link to={`${user}/${repoName}`}>{repoName}</Link>
+        <Link to={`/${user}`}>{user}</Link> /{" "}
+        <Link to={`/${user}/${repoName}`}>{repoName}</Link>
       </h1>
       <Query
         query={repoQuery}
-        variables={{ repoOwner: user, repoName, objectExpression: "HEAD:" }}
+        variables={{
+          repoOwner: user,
+          repoName,
+          objectExpression: gitRevExpression
+        }}
       >
         {({ loading, error, data }) => {
           let html = (
@@ -38,7 +94,6 @@ const Repo = props => {
           );
 
           if (data && !loading) {
-            //console.log(data);
             html = (
               <div>
                 {data.repository.shortDescriptionHTML && (
@@ -51,21 +106,21 @@ const Repo = props => {
                   />
                 )}
                 {data.repository.homepageUrl && <p>{data.homepageUrl}</p>}
-                <ul>
-                  {data.repository.object.entries.map((object, idx) => {
-                    return (
-                      <li key={idx}>
-                        <Link
-                          to={`${props.location.pathname}${object.type}/${
-                            data.repository.defaultBranchRef.name
-                          }/${object.name}`}
-                        >
-                          {object.name}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
+                {data.repository.object && (
+                  <div>
+                    {data.repository.object.entries ? (
+                      <Tree data={data} location={props.location} />
+                    ) : (
+                      <Blob
+                        data={data}
+                        user={user}
+                        repoName={repoName}
+                        blobOrTreePath={blobOrTreePath}
+                        location={props.location}
+                      />
+                    )}
+                  </div>
+                )}
               </div>
             );
           }
