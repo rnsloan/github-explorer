@@ -41,7 +41,6 @@ const Tree = props => {
         }/${obj.name}`;
 
         if (pathname.match(/tree|blob/)) {
-          console.log(url);
           url = pathname.replace(/tree|blob/, obj.type);
           url = `${url}/${obj.name}`;
         }
