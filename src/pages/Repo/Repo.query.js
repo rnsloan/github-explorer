@@ -16,6 +16,9 @@ export const repo = gql`
       defaultBranchRef {
         name
       }
+      owner {
+        __typename
+      }
       object(expression: $objectExpression) {
         ... on Tree {
           commitUrl

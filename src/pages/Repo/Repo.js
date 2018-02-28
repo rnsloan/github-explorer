@@ -66,6 +66,7 @@ const Repo = props => {
 
   let gitRevExpression = "HEAD:";
   let blobOrTreePath;
+  let isUser = false;
   try {
     const split = path.match("/(tree|blob)/([^/]*)/(.*)");
     const branchName = split[2];
@@ -75,9 +76,6 @@ const Repo = props => {
 
   return (
     <div>
-      <h1 className="uk-h3">
-        {userOrOrg} / <Link to={`/${userOrOrg}/${repoName}`}>{repoName}</Link>
-      </h1>
       <Query
         query={repoQuery}
         variables={{
@@ -132,8 +130,23 @@ const Repo = props => {
                 )}
               </div>
             );
+            if (data.repository.owner.__typename === "User") {
+              isUser = true;
+            }
           }
-          return html;
+          return (
+            <div>
+              <h1 className="uk-h3">
+                {isUser ? (
+                  <Link to={`/${userOrOrg}`}>{userOrOrg}</Link>
+                ) : (
+                  <span>{userOrOrg}</span>
+                )}{" "}
+                / <Link to={`/${userOrOrg}/${repoName}`}>{repoName}</Link>
+              </h1>
+              {html}
+            </div>
+          );
         }}
       </Query>
     </div>

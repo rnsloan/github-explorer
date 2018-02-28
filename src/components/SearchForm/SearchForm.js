@@ -8,14 +8,13 @@ class SearchForm extends Component {
     const params = new URLSearchParams(props.location.search);
     let query = params.get("query");
     this.state = {
-      search: query
+      search: query || ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.location.pathname);
     if (nextProps.location.pathname !== "/search") {
       this.setState({ search: "" });
     }

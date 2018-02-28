@@ -14,7 +14,13 @@ export const user = gql`
       avatarUrl
       company
       location
-      repositories(after: $after, before: $before, first: $first, last: $last) {
+      repositories(
+        after: $after
+        before: $before
+        first: $first
+        last: $last
+        orderBy: { field: UPDATED_AT, direction: DESC }
+      ) {
         pageInfo {
           startCursor
           endCursor
