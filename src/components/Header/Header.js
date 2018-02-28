@@ -1,11 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
+import SearchForm from "../SearchForm/SearchForm";
 import "./Header.css";
 
-const Header = () => (
-  <div className="Header">
-    <Link to="/">GitHub Explorer</Link>
-  </div>
-);
+const Header = () => {
+  const isHome = window.location.pathname.length < 2;
+  return (
+    <div className="Header">
+      <Link to="/">GitHub Explorer</Link>
+      {!isHome && <SearchForm small={true} />}
+    </div>
+  );
+};
 
-export default Header;
+export default withRouter(Header);

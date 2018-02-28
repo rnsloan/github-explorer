@@ -1,0 +1,14 @@
+.SearchForm {
+  width: 80%;
+}
+
+.SearchForm--small {
+  flex-basis: 300px;
+  margin-left: 30px;
+}
+
+.SearchForm--small > input {
+  font-weight: normal;
+  color: #fff;
+  height: 30px !important;
+}

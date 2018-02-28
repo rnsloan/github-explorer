@@ -61,7 +61,7 @@ const Tree = props => {
 
 const Repo = props => {
   const path = props.location.pathname.replace(props.match.url, "");
-  const user = props.match.params.user;
+  const userOrOrg = props.match.params.user;
   const repoName = props.match.params.repoName;
 
   let gitRevExpression = "HEAD:";
@@ -76,13 +76,12 @@ const Repo = props => {
   return (
     <div>
       <h1 className="uk-h3">
-        <Link to={`/${user}`}>{user}</Link> /{" "}
-        <Link to={`/${user}/${repoName}`}>{repoName}</Link>
+        {userOrOrg} / <Link to={`/${userOrOrg}/${repoName}`}>{repoName}</Link>
       </h1>
       <Query
         query={repoQuery}
         variables={{
-          repoOwner: user,
+          repoOwner: userOrOrg,
           repoName,
           objectExpression: gitRevExpression
         }}
@@ -103,7 +102,7 @@ const Repo = props => {
               <div>
                 <Helmet>
                   <title>
-                    GitHub Explorer - {user} / {repoName}
+                    GitHub Explorer - {userOrOrg} / {repoName}
                   </title>
                 </Helmet>
                 {data.repository.shortDescriptionHTML && (
@@ -123,7 +122,7 @@ const Repo = props => {
                     ) : (
                       <Blob
                         data={data}
-                        user={user}
+                        user={userOrOrg}
                         repoName={repoName}
                         blobOrTreePath={blobOrTreePath}
                         location={props.location}
