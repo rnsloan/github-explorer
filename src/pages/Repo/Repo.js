@@ -1,5 +1,6 @@
 import React from "react";
 import { Query } from "react-apollo";
+import { Helmet } from "react-helmet";
 import { withRouter, Link } from "react-router-dom";
 import { repo as repoQuery } from "./Repo.query";
 import Spinner from "../../components/Spinner";
@@ -95,6 +96,11 @@ const Repo = props => {
           if (data && !loading) {
             html = (
               <div>
+                <Helmet>
+                  <title>
+                    GitHub Explorer - {user} / {repoName}
+                  </title>
+                </Helmet>
                 {data.repository.shortDescriptionHTML && (
                   <p
                     dangerouslySetInnerHTML={(() => {

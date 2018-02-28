@@ -1,12 +1,12 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { Query } from "react-apollo";
+import { Helmet } from "react-helmet";
 import { user as userQuery } from "./User.query";
 import Spinner from "../../components/Spinner";
 import RepoListing from "../../components/RepoListing/RepoListing";
 import "../../shared/layout.css";
 import "./User.css";
-// Todo: add helmet to repo page
 
 const User = props => {
   const user = props.match.params.user;
@@ -29,6 +29,9 @@ const User = props => {
           const userData = data.user;
           html = (
             <div className="Layout-grid--flip-order">
+              <Helmet>
+                <title>GitHub Explorer - {user}</title>
+              </Helmet>
               <aside className="Layout-grid-column">
                 {userData.avatarUrl && (
                   <img
