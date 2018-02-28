@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { withRouter, Link } from "react-router-dom";
 import { repo as repoQuery } from "./Repo.query";
 import Spinner from "../../components/Spinner";
+import Error from "../../components/Error/Error";
 import "./Repo.css";
 
 const Blob = props => {
@@ -92,6 +93,10 @@ const Repo = props => {
               <Spinner />
             </div>
           );
+
+          if (error && !loading) {
+            html = <Error />;
+          }
 
           if (data && !loading) {
             html = (

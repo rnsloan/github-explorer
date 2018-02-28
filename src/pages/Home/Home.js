@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { Query } from "react-apollo";
 import Spinner from "../../components/Spinner";
+import Error from "../../components/Error/Error";
 import RepoListing from "../../components/RepoListing/RepoListing";
 import { home as homeQuery } from "./Home.query";
 import "./Home.css";
@@ -52,7 +53,11 @@ class Home extends Component {
               </div>
             );
 
-            if (data) {
+            if (error && !loading) {
+              html = <Error />;
+            }
+
+            if (data && !loading) {
               html = (
                 <div className="Home-repo-grid">
                   {data.search.edges.map(data => {

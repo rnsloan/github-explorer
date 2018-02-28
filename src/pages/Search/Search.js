@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import numeral from "numeral";
 import { Query } from "react-apollo";
 import Spinner from "../../components/Spinner";
+import Error from "../../components/Error/Error";
 import RepoListing from "../../components/RepoListing/RepoListing";
 import UserListing from "../../components/UserListing/UserListing";
 import IssueListing from "../../components/IssueListing/IssueListing";
@@ -58,6 +59,10 @@ const Search = props => {
             <Spinner />
           </div>
         );
+
+        if (error && !loading) {
+          html = <Error />;
+        }
 
         if (data && !loading) {
           html = (

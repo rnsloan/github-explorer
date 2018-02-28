@@ -4,6 +4,7 @@ import { Query } from "react-apollo";
 import { Helmet } from "react-helmet";
 import { user as userQuery } from "./User.query";
 import Spinner from "../../components/Spinner";
+import Error from "../../components/Error/Error";
 import RepoListing from "../../components/RepoListing/RepoListing";
 import "../../shared/layout.css";
 import "./User.css";
@@ -30,6 +31,10 @@ const User = props => {
             <Spinner />
           </div>
         );
+
+        if (error && !loading) {
+          html = <Error />;
+        }
 
         if (data && !loading) {
           const userData = data.user;
