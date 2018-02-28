@@ -1,11 +1,16 @@
 {
-  "short_name": "GitHub Explorer",
-  "name": "Basic GitHub UI using GraphQL Api",
+  "short_name": "GH Explorer",
+  "name": "Basic GitHub Explorer",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "196x196 64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
+    },
+    {
+      "src": "favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
   "start_url": "./index.html",

@@ -44,6 +44,7 @@ class SearchForm extends Component {
           onChange={this.handleChange}
           autoFocus
           value={this.state.search}
+          aria-label="search"
         />
       </form>
     );
