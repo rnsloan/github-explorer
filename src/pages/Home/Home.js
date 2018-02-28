@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { Query } from "react-apollo";
 import Spinner from "../../components/Spinner";
 import Error from "../../components/Error/Error";
@@ -11,6 +12,9 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <Helmet>
+          <title>GitHub Explorer</title>
+        </Helmet>
         <div className="uk-text-center">
           <SearchForm />
         </div>
