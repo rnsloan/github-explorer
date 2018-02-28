@@ -2,13 +2,25 @@ import { gql } from "apollo-boost";
 import { repoFragment } from "../../shared/queries";
 
 export const user = gql`
-  query user($login: String!) {
+  query user(
+    $login: String!
+    $after: String
+    $before: String
+    $first: Int
+    $last: Int
+  ) {
     user(login: $login) {
       bioHTML
       avatarUrl
       company
       location
-      repositories(first: 30) {
+      repositories(after: $after, before: $before, first: $first, last: $last) {
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+          hasPreviousPage
+        }
         edges {
           node {
             ...RepoSearch

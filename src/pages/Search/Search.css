@@ -8,14 +8,3 @@
   justify-content: space-between;
   width: 100%;
 }
-
-.Search-pagination {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-}
-
-.Search-pagination > button {
-  margin: 10px;
-  flex-basis: 150px;
-}

@@ -10,15 +10,21 @@ import "./User.css";
 
 const User = props => {
   const user = props.match.params.user;
+  const resultLength = 30;
+  const updateQuery = (previousResult, { fetchMoreResult }) => {
+    const newEdges = fetchMoreResult.user.repositories.edges;
+    return newEdges.length ? fetchMoreResult : previousResult;
+  };
   return (
     <Query
       query={userQuery}
       variables={{
-        login: user
+        login: user,
+        first: resultLength
       }}
+      notifyOnNetworkStatusChange={true}
     >
-      {({ loading, error, data }) => {
-        console.log(data);
+      {({ loading, error, data, fetchMore }) => {
         let html = (
           <div className="uk-text-center">
             <Spinner />
@@ -67,6 +73,43 @@ const User = props => {
                         />
                       );
                     })}
+                </div>
+                <div className="Layout-pagination">
+                  <button
+                    className="uk-button uk-button-default"
+                    disabled={!userData.repositories.pageInfo.hasPreviousPage}
+                    onClick={() => {
+                      fetchMore({
+                        variables: {
+                          before: userData.repositories.pageInfo.startCursor,
+                          after: null,
+                          last: resultLength,
+                          first: null
+                        },
+                        updateQuery
+                      });
+                    }}
+                  >
+                    Previous
+                  </button>
+
+                  <button
+                    className="uk-button uk-button-default"
+                    disabled={!userData.repositories.pageInfo.hasNextPage}
+                    onClick={() => {
+                      fetchMore({
+                        variables: {
+                          after: userData.repositories.pageInfo.endCursor,
+                          before: null,
+                          last: null,
+                          first: resultLength
+                        },
+                        updateQuery
+                      });
+                    }}
+                  >
+                    Next
+                  </button>
                 </div>
               </main>
             </div>
