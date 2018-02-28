@@ -34,7 +34,7 @@ const RepoListing = ({ data, doNotShowAvatar }) => {
           </div>
         )}
         <div className="uk-width-expand">
-          <h4>
+          <h2 className="uk-h4 RepoListing-title">
             <Link to={`/${data.nameWithOwner}`}>{data.nameWithOwner}</Link>&nbsp;
             <span
               title="stars in the last week"
@@ -44,7 +44,7 @@ const RepoListing = ({ data, doNotShowAvatar }) => {
               <img src={star} alt="" className="RepoListing-star" />
               {data.stargazers.totalCount}
             </span>
-          </h4>
+          </h2>
         </div>
       </header>
       <div className="uk-padding-small uk-padding-remove-horizontal uk-padding-remove-bottom">

@@ -7,3 +7,7 @@
 .RepoListing-badge {
   padding: 8px !important;
 }
+
+.RepoListing-title {
+  word-break: break-all;
+}
