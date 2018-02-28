@@ -19,18 +19,20 @@ const RepositoryTopics = ({ data }) => {
   );
 };
 
-const RepoListing = ({ data }) => {
+const RepoListing = ({ data, doNotShowAvatar }) => {
   return (
     <article className="uk-card uk-card-small uk-card-body uk-card-default">
       <header className="uk-grid uk-grid-small uk-flex-middle">
-        <div className="uk-width-auto">
-          <img
-            src={data.owner.avatarUrl}
-            alt={`${data.owner.login} avatar`}
-            width="50"
-            height="50"
-          />
-        </div>
+        {!doNotShowAvatar && (
+          <div className="uk-width-auto">
+            <img
+              src={data.owner.avatarUrl}
+              alt={`${data.owner.login} avatar`}
+              width="50"
+              height="50"
+            />
+          </div>
+        )}
         <div className="uk-width-expand">
           <h4>
             <Link to={`/${data.nameWithOwner}`}>{data.nameWithOwner}</Link>&nbsp;

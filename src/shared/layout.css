@@ -1,0 +1,41 @@
+.Layout-grid,
+.Layout-grid--flip-order {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 20px;
+  grid-template-areas:
+    "main"
+    "column";
+}
+
+.Layout-grid--flip-order {
+  grid-template-areas:
+    "column"
+    "main";
+}
+
+@media screen and (min-width: 768px) {
+  .Layout-grid,
+  .Layout-grid--flip-order {
+    grid-template-columns: 20% 1fr;
+    grid-template-areas: "column main";
+  }
+}
+
+.Layout-grid-column {
+  grid-area: column;
+}
+
+.Layout-grid-main {
+  grid-area: main;
+}
+
+.Layout-grid-items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Layout-grid-items > article {
+  width: 100%;
+  margin-bottom: 20px;
+}

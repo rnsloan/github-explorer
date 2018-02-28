@@ -4,34 +4,37 @@ import { Query } from "react-apollo";
 import { user as userQuery } from "./User.query";
 import Spinner from "../../components/Spinner";
 import RepoListing from "../../components/RepoListing/RepoListing";
+import "../../shared/layout.css";
+import "./User.css";
+// Todo: add helmet to repo page
 
 const User = props => {
   const user = props.match.params.user;
   return (
-    <div>
-      <Query
-        query={userQuery}
-        variables={{
-          login: user
-        }}
-      >
-        {({ loading, error, data }) => {
-          console.log(data);
-          let html = (
-            <div className="uk-text-center">
-              <Spinner />
-            </div>
-          );
+    <Query
+      query={userQuery}
+      variables={{
+        login: user
+      }}
+    >
+      {({ loading, error, data }) => {
+        console.log(data);
+        let html = (
+          <div className="uk-text-center">
+            <Spinner />
+          </div>
+        );
 
-          if (data && !loading) {
-            const userData = data.user;
-            html = (
-              <div>
+        if (data && !loading) {
+          const userData = data.user;
+          html = (
+            <div className="Layout-grid--flip-order">
+              <aside className="Layout-grid-column">
                 {userData.avatarUrl && (
                   <img
+                    className="User-avatar"
                     src={userData.avatarUrl}
                     alt={`${user} avatar`}
-                    width="230"
                   />
                 )}
                 <div>
@@ -47,25 +50,28 @@ const User = props => {
                   )}
                   {userData.company && <p>{userData.company}</p>}
                   {userData.location && <p>{userData.location}</p>}
-                  <div>
-                    {userData.repositories.edges.length &&
-                      userData.repositories.edges.map((data, idx) => {
-                        return (
-                          <RepoListing
-                            key={data.node.nameWithOwner}
-                            data={data.node}
-                          />
-                        );
-                      })}
-                  </div>
                 </div>
-              </div>
-            );
-          }
-          return html;
-        }}
-      </Query>
-    </div>
+              </aside>
+              <main className="Layout-grid-main">
+                <div className="Layout-grid-items">
+                  {userData.repositories.edges.length &&
+                    userData.repositories.edges.map((data, idx) => {
+                      return (
+                        <RepoListing
+                          key={data.node.nameWithOwner}
+                          data={data.node}
+                          doNotShowAvatar={true}
+                        />
+                      );
+                    })}
+                </div>
+              </main>
+            </div>
+          );
+        }
+        return html;
+      }}
+    </Query>
   );
 };
 

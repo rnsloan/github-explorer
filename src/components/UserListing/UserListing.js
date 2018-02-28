@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import location from "./location.svg";
 import email from "./email.svg";
 import "./UserListing.css";
@@ -19,7 +20,7 @@ const UserListing = ({ data }) => {
         )}
         <div className="uk-width-expand">
           <h4>
-            <a href={data.url}>{data.login}</a>&nbsp;{data.name}
+            <Link to={`/${data.login}`}>{data.login}</Link>&nbsp;{data.name}
           </h4>
         </div>
       </header>

@@ -8,6 +8,7 @@ import RepoListing from "../../components/RepoListing/RepoListing";
 import UserListing from "../../components/UserListing/UserListing";
 import IssueListing from "../../components/IssueListing/IssueListing";
 import { search as searchQuery } from "./Search.query";
+import "../../shared/layout.css";
 import "./Search.css";
 
 const formatNumber = number => {
@@ -60,11 +61,11 @@ const Search = props => {
 
         if (data && !loading) {
           html = (
-            <div className="Search-grid">
+            <div className="Layout-grid">
               <Helmet>
                 <title>GitHub Explorer - Search: {query}</title>
               </Helmet>
-              <aside className="Search-grid-column">
+              <aside className="Layout-grid-column">
                 <div className="Search-types">
                   <ul className="uk-list uk-list-divider uk-margin-remove">
                     <li className="uk-active">
@@ -94,12 +95,12 @@ const Search = props => {
                   </ul>
                 </div>
               </aside>
-              <main className="Search-grid-main">
+              <main className="Layout-grid-main">
                 <h1 className="uk-h3 uk-heading-divider">
                   {new Intl.NumberFormat().format(data.search.repositoryCount)}{" "}
                   {headingText}
                 </h1>
-                <div className="Search-grid-items">
+                <div className="Layout-grid-items">
                   {data.search.edges.map((data, idx) => {
                     if (type === "USER") {
                       return (
