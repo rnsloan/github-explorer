@@ -6,6 +6,6 @@ GitHub client with the v4 GraphQL API using [Apollo Client](https://www.apollogr
 
 ## Development
 
-* rename `token.sample.js` to `token.js` and insert a GitHub API token with the following scopes [https://developer.github.com/v4/guides/forming-calls/#authenticating-with-graphql](https://developer.github.com/v4/guides/forming-calls/#authenticating-with-graphql).
+* copy `token.sample.js` and name `token.js`. Insert a GitHub API token with the following scopes [https://developer.github.com/v4/guides/forming-calls/#authenticating-with-graphql](https://developer.github.com/v4/guides/forming-calls/#authenticating-with-graphql).
 * `yarn start` / `npm start`
 * built with [create-react-app](https://github.com/facebook/create-react-app)
