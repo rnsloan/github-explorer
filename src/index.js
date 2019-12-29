@@ -10,10 +10,19 @@ import Header from "./components/Header/Header";
 import Search from "./pages/Search/Search";
 import Repo from "./pages/Repo/Repo";
 import User from "./pages/User/User";
-import token from "./token";
 import introspectionQueryResultData from "./fragmentTypes.json";
 import registerServiceWorker from "./registerServiceWorker";
 import "./index.css";
+
+let token = process.env.REACT_APP_GITHUB_TOKEN;
+
+if (!token) {
+  try {
+    token = require("./token").default;
+  } catch (e) {
+    console.log("could not locate github token");
+  }
+}
 
 const headers = {
   authorization: `bearer ${token}`

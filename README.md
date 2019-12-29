@@ -6,6 +6,14 @@ GitHub client with the v4 GraphQL API using [Apollo Client](https://www.apollogr
 
 ## Development
 
-* copy `token.sample.js` and name `token.js`. Insert a GitHub API token with the following scopes [https://developer.github.com/v4/guides/forming-calls/#authenticating-with-graphql](https://developer.github.com/v4/guides/forming-calls/#authenticating-with-graphql).
-* `yarn start` / `npm start`
-* built with [create-react-app](https://github.com/facebook/create-react-app)
+### Environment Variables
+
+copy `.env.local.example` and name `.env.local` or one of the other file names detailed here [https://create-react-app.dev/docs/adding-custom-environment-variables/](https://create-react-app.dev/docs/adding-custom-environment-variables/).
+
+### Non-Environment Variables
+
+- copy `token.sample.js` and name `token.js`. Insert a GitHub API token with the following scopes [https://developer.github.com/v4/guides/forming-calls/#authenticating-with-graphql](https://developer.github.com/v4/guides/forming-calls/#authenticating-with-graphql).
+
+run `yarn start` / `npm start`.
+
+Built with [create-react-app](https://github.com/facebook/create-react-app)
