@@ -11,7 +11,6 @@ import Search from "./pages/Search/Search";
 import Repo from "./pages/Repo/Repo";
 import User from "./pages/User/User";
 import introspectionQueryResultData from "./fragmentTypes.json";
-import registerServiceWorker from "./registerServiceWorker";
 import "./index.css";
 
 const token = process.env.REACT_APP_GITHUB_TOKEN;
@@ -64,4 +63,3 @@ const App = () => (
 );
 
 ReactDOM.render(<App />, document.getElementById("root"));
-registerServiceWorker();
