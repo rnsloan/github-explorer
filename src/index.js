@@ -17,31 +17,29 @@ import "./index.css";
 let token = process.env.REACT_APP_GITHUB_TOKEN;
 
 if (!token) {
-  try {
-    token = require("./token").default;
-  } catch (e) {
-    console.log("could not locate github token");
-  }
+  throw new Error(
+    "Could not find environment variable 'REACT_APP_GITHUB_TOKEN'"
+  );
 }
 
 const headers = {
-  authorization: `bearer ${token}`
+  authorization: `bearer ${token}`,
 };
 
 const httpLink = new HttpLink({
   uri: "https://api.github.com/graphql",
-  headers: headers
+  headers: headers,
 });
 
 // fragment matching for SearchResultItem Union
 const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData
+  introspectionQueryResultData,
 });
 
 // ApolloClient from apollo-boost is not setting fetch headers
 const client = new ApolloClient({
   link: httpLink,
-  cache: new InMemoryCache({ fragmentMatcher })
+  cache: new InMemoryCache({ fragmentMatcher }),
 });
 
 const App = () => (
