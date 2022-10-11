@@ -14,7 +14,7 @@ import introspectionQueryResultData from "./fragmentTypes.json";
 import registerServiceWorker from "./registerServiceWorker";
 import "./index.css";
 
-let token = process.env.REACT_APP_GITHUB_TOKEN;
+const token = process.env.REACT_APP_GITHUB_TOKEN;
 
 if (!token) {
   throw new Error(
