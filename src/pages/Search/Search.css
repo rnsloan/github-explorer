@@ -8,3 +8,7 @@
   justify-content: space-between;
   width: 100%;
 }
+
+.Search-active {
+  font-weight: bold;
+}
