@@ -65,6 +65,18 @@ const Search = props => {
         }
 
         if (data && !loading) {
+          const { repositoryCount, issueCount, userCount } = data.search
+          let headingNumber = repositoryCount
+      
+          switch (type.toLowerCase()) {
+            case "issue":
+              headingNumber = issueCount
+              break;
+            case "user":
+              headingNumber = userCount
+              break;            
+          }
+
           html = (
             <div className="Layout-grid">
               <Helmet>
@@ -75,26 +87,17 @@ const Search = props => {
                   <ul className="uk-list uk-list-divider uk-margin-remove">
                     <li className="uk-active">
                       <Link to={`search?query=${query}`}>
-                        <span>Repositories </span>
-                        <span className="uk-badge">
-                          {formatNumber(data.search.repositoryCount)}
-                        </span>
+                        <span>Repositories </span>                        
                       </Link>
                     </li>
                     <li>
                       <Link to={`search?query=${query}&type=issue`}>
-                        <span>Issues</span>
-                        <span className="uk-badge">
-                          {formatNumber(data.search.issueCount)}
-                        </span>
+                        <span>Issues</span>                        
                       </Link>
                     </li>
                     <li>
                       <Link to={`search?query=${query}&type=user`}>
-                        <span>Users</span>
-                        <span className="uk-badge">
-                          {formatNumber(data.search.userCount)}
-                        </span>
+                        <span>Users</span>                        
                       </Link>
                     </li>
                   </ul>
@@ -102,7 +105,7 @@ const Search = props => {
               </aside>
               <main className="Layout-grid-main">
                 <h1 className="uk-h3 uk-heading-divider">
-                  {new Intl.NumberFormat().format(data.search.repositoryCount)}{" "}
+                  {new Intl.NumberFormat().format(headingNumber)}{" "}
                   {headingText}
                 </h1>
                 <div className="Layout-grid-items">
