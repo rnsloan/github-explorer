@@ -1,16 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ApolloProvider } from "react-apollo";
-import { ApolloClient } from "apollo-client";
-import { HttpLink, InMemoryCache } from "apollo-boost";
-import { IntrospectionFragmentMatcher } from "apollo-cache-inmemory";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  HttpLink,
+} from "@apollo/client";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Header from "./components/Header/Header";
 import Search from "./pages/Search/Search";
 import Repo from "./pages/Repo/Repo";
 import User from "./pages/User/User";
-import introspectionQueryResultData from "./fragmentTypes.json";
 import "./index.css";
 
 const token = process.env.REACT_APP_GITHUB_TOKEN;
@@ -21,24 +22,16 @@ if (!token) {
   );
 }
 
-const headers = {
-  authorization: `bearer ${token}`,
-};
-
 const httpLink = new HttpLink({
   uri: "https://api.github.com/graphql",
-  headers: headers,
+  headers: {
+    authorization: `bearer ${token}`,
+  },
 });
 
-// fragment matching for SearchResultItem Union
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData,
-});
-
-// ApolloClient from apollo-boost is not setting fetch headers
 const client = new ApolloClient({
   link: httpLink,
-  cache: new InMemoryCache({ fragmentMatcher }),
+  cache: new InMemoryCache(),
 });
 
 const App = () => (

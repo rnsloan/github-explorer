@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost";
+import { gql } from "@apollo/client";
 
 // $objectExpression = "HEAD:"
 // $objectExpression = "HEAD:src/App.tsx"

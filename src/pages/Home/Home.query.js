@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost";
+import { gql } from "@apollo/client";
 import { DateTime } from "luxon";
 
 const dt = DateTime.local()
